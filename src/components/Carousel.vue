@@ -43,7 +43,7 @@ export default {
 
     // next slide
     const nextSlide = () => {
-    restartAutoPlay()
+      restartAutoPlay()
       if (currentSlide.value === getSlideCount.value) {
         currentSlide.value = 1;
         return;
@@ -53,7 +53,7 @@ export default {
 
     // prev slide
     const prevSlide = () => {
-    restartAutoPlay()
+      restartAutoPlay()
       if (currentSlide.value === 1) {
         currentSlide.value = 1;
         return;
@@ -62,21 +62,21 @@ export default {
     };
 
     const goToSlide = (index) => {
-    restartAutoPlay()
+      restartAutoPlay()
       currentSlide.value = index + 1;
     };
 
     // autoplay
     if (autoPlayEnabled.value) {
-                timer = setInterval(nextSlide, timeoutDuration.value)
-            }
+        timer = setInterval(nextSlide, timeoutDuration.value)
+    }
 
-            let restartAutoPlay = () => {
-                clearInterval(timer)
-                if (autoPlayEnabled.value) {
-                    timer = setInterval(nextSlide, timeoutDuration.value)
-                }
-            }
+    let restartAutoPlay = () => {
+        clearInterval(timer)
+        if (autoPlayEnabled.value) {
+            timer = setInterval(nextSlide, timeoutDuration.value)
+        }
+    }
 
     onMounted(() => {
       getSlideCount.value = document.querySelectorAll(".slide").length;
