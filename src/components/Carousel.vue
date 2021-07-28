@@ -43,6 +43,7 @@ export default {
 
     // next slide
     const nextSlide = () => {
+      restartAutoPlay()
       if (currentSlide.value === getSlideCount.value) {
         currentSlide.value = 1;
         return;
@@ -52,6 +53,7 @@ export default {
 
     // prev slide
     const prevSlide = () => {
+      restartAutoPlay()
       if (currentSlide.value === 1) {
         currentSlide.value = 1;
         return;
@@ -60,18 +62,20 @@ export default {
     };
 
     const goToSlide = (index) => {
+      restartAutoPlay()
       currentSlide.value = index + 1;
     };
 
     // autoplay
-    const autoPlay = () => {
-      setInterval(() => {
-        nextSlide();
-      }, timeoutDuration.value);
-    };
-
     if (autoPlayEnabled.value) {
-      autoPlay();
+        timer = setInterval(nextSlide, timeoutDuration.value)
+    }
+
+    let restartAutoPlay = () => {
+        clearInterval(timer)
+        if (autoPlayEnabled.value) {
+            timer = setInterval(nextSlide, timeoutDuration.value)
+        }
     }
 
     onMounted(() => {
